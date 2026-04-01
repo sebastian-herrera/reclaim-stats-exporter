@@ -1,0 +1,56 @@
+schema: spec-driven
+
+context: |
+  Language: English (en-US)
+  All artifacts must be written in English
+
+  Tech stack:
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+#   context: |
+#     Tech stack: TypeScript, React, Node.js
+#     We use conventional commits
+#     Domain: e-commerce platform
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# example #2
+# schema: spec-driven
+
+# context: |
+#   Tech stack: TypeScript, Node.js (≥20.19.0), ESM modules
+#   Package manager: pnpm
+
+#   Cross-platform requirements:
+#   - This tool runs on macOS, Linux, AND Windows
+#   - Always use path.join() or path.resolve() for file paths - never hardcode slashes
+#   - Never assume forward-slash path separators
+#   - Tests must use path.join() for expected path values, not hardcoded strings
+#   - Consider case sensitivity differences in file systems
+
+# rules:
+#   specs:
+#     - Include scenarios for Windows path handling when dealing with file paths
+#     - Requirements involving paths must specify cross-platform behavior
+#     - Be explicit about mechanisms, not just outcomes (say HOW, not just WHAT)
+#     - If we generate artifacts, specify deletion/modification by explicit list lookup, not pattern matching
+#   tasks:
+#     - Add Windows CI verification as a task when changes involve file paths
+#     - Include cross-platform testing considerations
+#   design:
+#     - Document any platform-specific behavior or limitations
+#     - Prefer Node.js path module over string manipulation for paths
+#     - Use existing constants and lists - don't invent detection mechanisms
+#     - Prefer explicit lookups over pattern matching or regex
+#     - If we generate it, we track it by name in a constant

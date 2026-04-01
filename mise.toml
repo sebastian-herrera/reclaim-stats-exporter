@@ -1,0 +1,8 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+[tools]
+node = "lts-krypton"
+pnpm = "10.33.0"
+
+[env]
+MOON_TOOLCHAIN_FORCE_GLOBALS = "true"
