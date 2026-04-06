@@ -57,40 +57,39 @@ function AppContent() {
   return (
     <div className="p-4 space-y-4 min-h-screen">
       <div className="flex items-center justify-between">
-        <h1 className="text-sm font-semibold">Reclaim Stats Exporter</h1>
+        {/*<h1 className="text-sm font-semibold">Reclaim Stats Exporter</h1>*/}
+
+        <Button
+          onClick={handleAction}
+          disabled={extractStatus === 'loading'}
+          variant={
+            extractStatus === 'error'
+              ? 'destructive'
+              : result
+                ? 'secondary'
+                : 'default'
+          }
+        >
+          {result ? (
+            <>
+              <Trash className="w-4 h-4 mr-1.5" />
+              Clear Markdown
+            </>
+          ) : (
+            <>
+              <Play className="w-4 h-4 mr-1.5" />
+              {extractStatus === 'loading'
+                ? 'Extracting...'
+                : extractStatus === 'success'
+                  ? extractMessage
+                  : extractStatus === 'error'
+                    ? extractMessage
+                    : 'Extract Events'}
+            </>
+          )}
+        </Button>
         <ModeToggle />
       </div>
-
-      <Button
-        className="w-full"
-        onClick={handleAction}
-        disabled={extractStatus === 'loading'}
-        variant={
-          extractStatus === 'error'
-            ? 'destructive'
-            : result
-              ? 'secondary'
-              : 'default'
-        }
-      >
-        {result ? (
-          <>
-            <Trash className="w-4 h-4 mr-1.5" />
-            Clear Markdown
-          </>
-        ) : (
-          <>
-            <Play className="w-4 h-4 mr-1.5" />
-            {extractStatus === 'loading'
-              ? 'Extracting...'
-              : extractStatus === 'success'
-                ? extractMessage
-                : extractStatus === 'error'
-                  ? extractMessage
-                  : 'Extract Events'}
-          </>
-        )}
-      </Button>
 
       <ResultsView result={result} />
     </div>
