@@ -28,3 +28,5 @@ web-ext.config.ts
 # ai
 repomix*
 wxt-docs.xml
+.ralph
+.agents

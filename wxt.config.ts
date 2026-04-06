@@ -1,5 +1,5 @@
+import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
-import path from 'path';
 import { defineConfig } from 'wxt';
 
 // See https://wxt.dev/api/config.html
@@ -13,6 +13,10 @@ export default defineConfig({
       },
     },
   }),
+  manifest: {
+    permissions: ['storage', 'scripting'],
+    host_permissions: ['https://app.reclaim.ai/*'],
+  },
   webExt: {
     chromiumArgs: ['--user-data-dir=./.wxt/chrome-data'],
     disabled: true,

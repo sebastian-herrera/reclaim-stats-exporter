@@ -11,6 +11,13 @@ event_loop:
   max_iterations: 100
   # max_runtime_seconds: 14400    # 4 hours max
 
+core:
+  guardrails:
+    - "You MUST use the available OpenSpec skills to process tasks and manage state."
+    - "Do not guess task completion; rely on the OpenSpec skills to verify and mark tasks."
+    - Documentation, WXT documentation is available at ./wxt-docs.xml in the project root
+    - Documentation, Consult it when working with WXT APIs, configuration, or extension patterns
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Additional Configuration (uncomment to customize)
 # ─────────────────────────────────────────────────────────────────────────────

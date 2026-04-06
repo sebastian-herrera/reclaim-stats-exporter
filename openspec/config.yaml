@@ -5,52 +5,25 @@ context: |
   All artifacts must be written in English
 
   Tech stack:
+  - Framework: WXT (browser extension framework)
+  - UI: React 19, TypeScript
+  - Styling: Tailwind CSS v4, shadcn components
+  - Linter: Biome
+  - Package manager: pnpm
+  - Node: 24.x
+  - Target: Chrome (primary), Firefox (secondary)
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+  Path alias: @/* → ./* (root)
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Documentation:
+  - WXT documentation is available at ./wxt-docs.xml in the project root
+  - Consult it when working with WXT APIs, configuration, or extension patterns
 
-# example #2
-# schema: spec-driven
+  Project conventions:
+  - Conventional Commits (feat:, fix:, chore:, etc.)
 
-# context: |
-#   Tech stack: TypeScript, Node.js (≥20.19.0), ESM modules
-#   Package manager: pnpm
-
-#   Cross-platform requirements:
-#   - This tool runs on macOS, Linux, AND Windows
-#   - Always use path.join() or path.resolve() for file paths - never hardcode slashes
-#   - Never assume forward-slash path separators
-#   - Tests must use path.join() for expected path values, not hardcoded strings
-#   - Consider case sensitivity differences in file systems
-
-# rules:
-#   specs:
-#     - Include scenarios for Windows path handling when dealing with file paths
-#     - Requirements involving paths must specify cross-platform behavior
-#     - Be explicit about mechanisms, not just outcomes (say HOW, not just WHAT)
-#     - If we generate artifacts, specify deletion/modification by explicit list lookup, not pattern matching
-#   tasks:
-#     - Add Windows CI verification as a task when changes involve file paths
-#     - Include cross-platform testing considerations
-#   design:
-#     - Document any platform-specific behavior or limitations
-#     - Prefer Node.js path module over string manipulation for paths
-#     - Use existing constants and lists - don't invent detection mechanisms
-#     - Prefer explicit lookups over pattern matching or regex
-#     - If we generate it, we track it by name in a constant
+  Domain context:
+  - This extension reads the DOM of reclaim.ai (a web app for managing work/personal hours)
+  - It is NOT affiliated with reclaim.ai
+  - The sole purpose is to extract stats data from the DOM and export it as Markdown
+  - Markdown output is intended for use with AI tools
