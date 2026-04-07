@@ -1,0 +1,29 @@
+schema: spec-driven
+
+context: |
+  Language: English (en-US)
+  All artifacts must be written in English
+
+  Tech stack:
+  - Framework: WXT (browser extension framework)
+  - UI: React 19, TypeScript
+  - Styling: Tailwind CSS v4, shadcn components
+  - Linter: Biome
+  - Package manager: pnpm
+  - Node: 24.x
+  - Target: Chrome (primary), Firefox (secondary)
+
+  Path alias: @/* → ./* (root)
+
+  Documentation:
+  - WXT documentation is available at ./wxt-docs.xml in the project root
+  - Consult it when working with WXT APIs, configuration, or extension patterns
+
+  Project conventions:
+  - Conventional Commits (feat:, fix:, chore:, etc.)
+
+  Domain context:
+  - This extension reads the DOM of reclaim.ai (a web app for managing work/personal hours)
+  - It is NOT affiliated with reclaim.ai
+  - The sole purpose is to extract stats data from the DOM and export it as Markdown
+  - Markdown output is intended for use with AI tools

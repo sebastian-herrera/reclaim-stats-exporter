@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Default SidePanel Title</title>
+        <script>
+            (function() {
+                var theme = localStorage.getItem('reclaim-stats-theme') || 'system';
+                var root = document.documentElement;
+                root.classList.remove('light', 'dark');
+                if (theme === 'system') {
+                    root.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                } else {
+                    root.classList.add(theme);
+                }
+            })();
+        </script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="./main.tsx"></script>
+    </body>
+</html>
