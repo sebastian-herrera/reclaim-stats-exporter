@@ -3,8 +3,8 @@
 Just a vibe-coded personal tool for `reclaim.ai` that converts calendar events to markdown.
 
 ## Usage
-1. Open [app.reclaim.ai](https://app.reclaim.ai)
-2. Click the extension icon
+1. Download [reclaim-stats-exporter](https://chromewebstore.google.com/detail/reclaim-stats-exporter/pmneglmejamccphfbipeolckkcejpnmc)
+2. Open [app.reclaim.ai](https://app.reclaim.ai) and the extension
 3. Hit **Extract Events**
 4. Copy or download the generated markdown
 

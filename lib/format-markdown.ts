@@ -5,7 +5,7 @@ interface DayGroup {
   events: ExtractedEvent[];
 }
 
-export { DayGroup };
+export type { DayGroup };
 
 function groupEventsByDay(events: ExtractedEvent[]): DayGroup[] {
   const dayOrder: string[] = [];
@@ -95,10 +95,17 @@ function getDayTotalDuration(events: ExtractedEvent[]): number {
   }, 0);
 }
 
+function formatTable(
+  rows: string[],
+  headers = ['Task', 'Duration', 'Time'],
+): string {
+  const separator = headers.map(() => ':---').join(' | ');
+  return `| ${headers.join(' | ')} |\n| ${separator} |\n${rows.join('\n')}`;
+}
+
 function formatEventsTable(events: ExtractedEvent[]): string {
-  const tableHeader = `| Task | Duration | Time |\n| :--- | :--- | :--- |`;
-  const tableRows = events.map(formatEventRow).join('\n');
-  return `${tableHeader}\n${tableRows}`;
+  const rows = events.map(formatEventRow);
+  return formatTable(rows);
 }
 
 function formatFlatList(events: ExtractedEvent[]): string {
@@ -120,12 +127,33 @@ function isUnscheduled(event: ExtractedEvent): boolean {
 }
 
 export {
+  calculateDuration,
+  formatDuration,
+  getDayTotalDuration,
   groupEventsByDay,
   isUnscheduled,
-  getDayTotalDuration,
-  formatDuration,
-  calculateDuration,
 };
+
+function getTaskBreakdown(events: ExtractedEvent[]): Map<string, number> {
+  const breakdown = new Map<string, number>();
+  for (const event of events) {
+    const duration = calculateDuration(event.startTime, event.endTime) ?? 0;
+    const current = breakdown.get(event.title) ?? 0;
+    breakdown.set(event.title, current + duration);
+  }
+  return breakdown;
+}
+
+function formatTaskBreakdown(breakdown: Map<string, number>): string {
+  if (breakdown.size === 0) return '';
+
+  const rows = Array.from(breakdown.entries())
+    .sort((a, b) => b[1] - a[1])
+    .map(([title, duration]) => `| ${title} | ${formatDuration(duration)} |`);
+
+  const table = formatTable(rows, ['Task', 'Total Duration']);
+  return `<details>\n<summary>Task Summary</summary>\n${table}\n\n</details>`;
+}
 
 export function formatMarkdown(
   events: ExtractedEvent[],
@@ -138,14 +166,19 @@ export function formatMarkdown(
   const scheduledTotal = getDayTotalDuration(scheduled);
   const scheduledTotalStr = formatDuration(scheduledTotal);
 
+  const taskBreakdown = getTaskBreakdown(scheduled);
+  const breakdownStr = formatTaskBreakdown(taskBreakdown);
+
   const header = [
     '# Reclaim Stats Export',
     '',
     `- **Page**: ${route}`,
     `- **Events**: ${scheduled.length}`,
     `- **Total:** ${scheduledTotalStr}`,
-    // `- **Extracted at**: ${new Date(timestamp).toLocaleString()}`,
-  ].join('\n');
+    breakdownStr,
+  ]
+    .filter(Boolean)
+    .join('\n');
 
   const days = groupEventsByDay(scheduled);
 
