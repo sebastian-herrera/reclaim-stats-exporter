@@ -93,6 +93,11 @@ export function ResultsView({ result }: ResultsViewProps) {
               tr: {
                 props: { className: 'even:bg-secondary' },
               },
+              summary: {
+                props: {
+                  className: 'font-semibold text-foreground',
+                },
+              },
             },
           }}
         >

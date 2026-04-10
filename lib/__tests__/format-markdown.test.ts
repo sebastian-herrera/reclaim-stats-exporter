@@ -18,9 +18,11 @@ const createEvent = (
 
 describe('formatMarkdown', () => {
   describe('metadata header', () => {
-    it('should include route, event count, and timestamp', () => {
+    it('should include route, event count, total duration, and task breakdown', () => {
       const events: ExtractedEvent[] = [
-        createEvent('Test Event', 'Mon 31', '9:00am', '10:00am'),
+        createEvent('Task A', 'Mon 31', '9:00am', '10:00am'),
+        createEvent('Task A', 'Mon 31', '10:00am', '10:30am'),
+        createEvent('Task B', 'Mon 31', '11:00am', '12:00pm'),
       ];
       const result = formatMarkdown(
         events,
@@ -30,8 +32,14 @@ describe('formatMarkdown', () => {
 
       expect(result).toContain('# Reclaim Stats Export');
       expect(result).toContain('- **Page**: planner');
-      expect(result).toContain('- **Events**: 1');
-      expect(result).toContain('- **Total:**');
+      expect(result).toContain('- **Events**: 3');
+      expect(result).toContain('- **Total:** 2 h 30 min');
+      expect(result).toContain('<details>');
+      expect(result).toContain('<summary>Task Summary</summary>');
+      expect(result).toContain('| Task | Total Duration |');
+      expect(result).toContain('| :--- | :--- |');
+      expect(result).toContain('| Task A | 1 h 30 min |');
+      expect(result).toContain('| Task B | 1 h |');
     });
   });
 
